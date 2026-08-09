@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { X, Send, Sparkles, Loader2, Bot, User, ExternalLink } from 'lucide-react';
+import Markdown from 'react-markdown';
 import { ChatMessage, ThemeMode } from '../types';
 import { THEME_CONFIGS } from '../data/themeData';
 
@@ -157,7 +158,7 @@ export const AIChatbotWidget: React.FC<AIChatbotWidgetProps> = ({ theme }) => {
                   </div>
                 )}
                 <div 
-                  className={`max-w-[78%] p-3 rounded-2xl ${
+                  className={`max-w-[80%] p-3 rounded-2xl ${
                     m.sender === 'user'
                       ? 'text-black font-medium rounded-tr-none shadow-md'
                       : `${activeConfig.cardClass} ${activeConfig.borderClass} border rounded-tl-none`
@@ -166,7 +167,41 @@ export const AIChatbotWidget: React.FC<AIChatbotWidgetProps> = ({ theme }) => {
                     backgroundColor: m.sender === 'user' ? activeConfig.accentColor : undefined
                   }}
                 >
-                  <p className="leading-relaxed whitespace-pre-line">{m.text}</p>
+                  <div className="markdown-body leading-relaxed text-xs">
+                    <Markdown
+                      components={{
+                        p: ({ children }) => <p className="mb-1.5 last:mb-0 leading-relaxed">{children}</p>,
+                        strong: ({ children }) => <strong className="font-bold opacity-100">{children}</strong>,
+                        em: ({ children }) => <em className="italic opacity-90">{children}</em>,
+                        ul: ({ children }) => <ul className="list-disc list-inside space-y-1 my-1.5 pl-1">{children}</ul>,
+                        ol: ({ children }) => <ol className="list-decimal list-inside space-y-1 my-1.5 pl-1">{children}</ol>,
+                        li: ({ children }) => <li className="leading-snug">{children}</li>,
+                        h1: ({ children }) => <h1 className="text-sm font-black uppercase mt-2 mb-1">{children}</h1>,
+                        h2: ({ children }) => <h2 className="text-xs font-black uppercase mt-2 mb-1">{children}</h2>,
+                        h3: ({ children }) => <h3 className="text-xs font-bold uppercase mt-1.5 mb-0.5">{children}</h3>,
+                        code: ({ children, inline }: any) => 
+                          inline ? (
+                            <code className="px-1 py-0.5 rounded text-[10px] font-mono bg-black/20 font-bold">{children}</code>
+                          ) : (
+                            <pre className="p-2 rounded-lg text-[10px] font-mono bg-black/30 overflow-x-auto my-1.5">
+                              <code>{children}</code>
+                            </pre>
+                          ),
+                        a: ({ href, children }) => (
+                          <a href={href} target="_blank" rel="noreferrer" className="underline font-bold hover:opacity-80">
+                            {children}
+                          </a>
+                        ),
+                        blockquote: ({ children }) => (
+                          <blockquote className="border-l-2 border-current/40 pl-2 italic my-1.5 opacity-90">
+                            {children}
+                          </blockquote>
+                        )
+                      }}
+                    >
+                      {m.text}
+                    </Markdown>
+                  </div>
                   <span className={`block text-[9px] mt-1 ${
                     m.sender === 'user' ? 'text-black/70 text-right font-bold' : 'opacity-60'
                   }`}>

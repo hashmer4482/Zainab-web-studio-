@@ -85,7 +85,7 @@ Services offered:
 
 Platform Developer Credit: Engineered by Muhammad Abdullah Hashmi (Portfolio: https://hashmerdev.vercel.app).
 
-Respond clearly, professionally, and concisely in a refined editorial style to client questions about services, pricing strategies, or consultation requests.`;
+Respond clearly, professionally, and concisely using rich Markdown formatting (e.g. **bold text** for key highlights, bullet points for lists, and formatted links or subheadings where helpful) to provide well-structured advice to clients asking about services, pricing strategies, or consultation requests.`;
 
     const contents = [
       ...(conversationHistory || []).map((c: any) => `${c.role === 'user' ? 'Client' : 'Assistant'}: ${c.content}`),
