@@ -18,7 +18,7 @@ function getGenAIClient() {
     apiKey,
     httpOptions: {
       headers: {
-        "User-Agent": "aistudio-build",
+        "User-Agent": "zainab-web-studio",
       },
     },
   });
