@@ -85,6 +85,9 @@ Services offered:
 
 Platform Developer Credit: Engineered by Muhammad Abdullah Hashmi (Portfolio: https://hashmerdev.vercel.app).
 
+Important Pricing Instruction:
+Pricing for all services is custom tailored to each business and discussed directly via Email (shakeelammar59@gmail.com) or WhatsApp (+923324357459). When asked about prices, kindly explain that prices are customized for each client and invite them to chat on WhatsApp or Email for a fast tailored quote.
+
 Respond clearly, professionally, and concisely using rich Markdown formatting (e.g. **bold text** for key highlights, bullet points for lists, and formatted links or subheadings where helpful) to provide well-structured advice to clients asking about services, pricing strategies, or consultation requests.`;
 
     const contents = [

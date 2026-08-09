@@ -8,7 +8,6 @@ import {
 } from 'lucide-react';
 
 interface ServicesSectionProps {
-  onSelectServiceForQuote: (serviceId: string) => void;
   onOpenContactWithService: (serviceTitle: string) => void;
   theme: ThemeMode;
 }
@@ -136,9 +135,9 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               {/* Bottom Actions */}
               <div className={`pt-6 border-t space-y-3 ${activeConfig.borderClass}`}>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="opacity-60 font-medium">Starting from</span>
-                  <span className="font-black text-sm" style={{ color: activeConfig.accentColor }}>
-                    ${service.basePrice}<span className="text-[10px] opacity-60 font-normal">/proj</span>
+                  <span className="opacity-60 font-medium">Pricing</span>
+                  <span className="font-bold text-[11px] uppercase tracking-wider" style={{ color: activeConfig.accentColor }}>
+                    Discuss via Email / WhatsApp
                   </span>
                 </div>
 
@@ -171,14 +170,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             <h4 className="text-lg sm:text-xl font-black uppercase">Need a multi-service digital growth package?</h4>
             <p className="text-xs opacity-80">Combine Web Development, SEO, PPC Ads, and Canva Video Ads into a single retainership.</p>
           </div>
-          <a
-            href="#calculator"
+          <button
+            onClick={() => onOpenContactWithService('Full Digital Growth Retainer')}
             className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-black font-black text-xs uppercase tracking-widest hover:opacity-90 transition-opacity shadow-lg whitespace-nowrap min-h-[44px]"
             style={{ backgroundColor: activeConfig.accentColor }}
           >
-            Launch Package Estimator
+            Request Growth Proposal
             <ArrowRight className="w-4 h-4 text-black" />
-          </a>
+          </button>
         </div>
 
       </div>

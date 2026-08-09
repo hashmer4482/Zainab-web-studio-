@@ -2,76 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ServicesSection } from './components/ServicesSection';
-import { PortfolioSection } from './components/PortfolioSection';
-import { QuoteCalculator } from './components/QuoteCalculator';
 import { TestimonialsFAQ } from './components/TestimonialsFAQ';
 import { ContactModal } from './components/ContactModal';
 import { Footer } from './components/Footer';
 import { AIChatbotWidget } from './components/AIChatbotWidget';
-import { AuthModal } from './components/AuthModal';
-import { SignInSuccessModal } from './components/SignInSuccessModal';
 import { ThemeSelectorModal } from './components/ThemeSelectorModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
-import { AuthUser, ThemeMode } from './types';
+import { ThemeMode } from './types';
 import { THEME_CONFIGS } from './data/themeData';
-import { auth, onAuthStateChanged, logoutFirebase, getRedirectResult } from './lib/firebase';
 import { Code, ExternalLink } from 'lucide-react';
 
 export default function App() {
   const [theme, setTheme] = useState<ThemeMode>('dark');
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
 
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
-  const [isInitialGate, setIsInitialGate] = useState(true);
-  const [isSignInSuccessOpen, setIsSignInSuccessOpen] = useState(false);
-
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [contactPrefilledService, setContactPrefilledService] = useState('');
   const [contactPrefilledMessage, setContactPrefilledMessage] = useState('');
 
   const activeConfig = THEME_CONFIGS[theme] || THEME_CONFIGS.dark;
-
-  // Listen to Firebase auth state changes and redirect auth results
-  useEffect(() => {
-    // Check if coming back from redirect
-    getRedirectResult(auth).then((result) => {
-      if (result?.user) {
-        setUser({
-          isGuest: false,
-          name: result.user.displayName || 'Google User',
-          email: result.user.email || '',
-          avatar: result.user.photoURL || undefined,
-          googleId: result.user.uid
-        });
-        setIsInitialGate(false);
-        setIsAuthModalOpen(false);
-      }
-    }).catch((err) => {
-      console.warn("Redirect auth result error:", err);
-    });
-
-    const unsubscribe = onAuthStateChanged(auth, (fbUser) => {
-      if (fbUser) {
-        setUser((prev) => {
-          if (!prev || prev.isGuest) {
-            setIsSignInSuccessOpen(true);
-          }
-          return {
-            isGuest: false,
-            name: fbUser.displayName || 'Google User',
-            email: fbUser.email || '',
-            avatar: fbUser.photoURL || undefined,
-            googleId: fbUser.uid
-          };
-        });
-        setIsInitialGate(false);
-        setIsAuthModalOpen(false);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   // Synchronize document dark class or styles
   useEffect(() => {
@@ -86,17 +35,6 @@ export default function App() {
     setContactPrefilledService(serviceName);
     setContactPrefilledMessage(customMessage);
     setIsContactModalOpen(true);
-  };
-
-  const handleLogout = async () => {
-    try {
-      await logoutFirebase();
-    } catch (err) {
-      console.error("Logout error:", err);
-    }
-    setUser(null);
-    setIsInitialGate(true);
-    setIsAuthModalOpen(true);
   };
 
   return (
@@ -126,8 +64,6 @@ export default function App() {
         onOpenThemeSelector={() => setIsThemeModalOpen(true)}
         activeSection="services"
         theme={theme}
-        user={user || { isGuest: true }}
-        onOpenAuth={() => setIsAuthModalOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -140,27 +76,7 @@ export default function App() {
 
         {/* Core Services Section */}
         <ServicesSection
-          onSelectServiceForQuote={() => {
-            const el = document.querySelector('#calculator');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}
           onOpenContactWithService={(serviceTitle) => handleOpenContact(serviceTitle)}
-          theme={theme}
-        />
-
-        {/* Portfolio & Case Studies */}
-        <PortfolioSection
-          onOpenContactWithProject={(projectTitle) => 
-            handleOpenContact('Website Design & Optimization', `Interested in replicating the case study results for: ${projectTitle}`)
-          }
-          theme={theme}
-        />
-
-        {/* Custom Package Estimator & ROI Calculator */}
-        <QuoteCalculator
-          onOpenContactWithPackage={(packageDetails) => 
-            handleOpenContact('Full Digital Growth Retainer', packageDetails)
-          }
           theme={theme}
         />
 
@@ -198,40 +114,6 @@ export default function App() {
         onClose={() => setIsContactModalOpen(false)}
         prefilledService={contactPrefilledService}
         prefilledMessage={contactPrefilledMessage}
-        theme={theme}
-      />
-
-      {/* Google Sign-In & Guest Auth Modal Gate */}
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => {
-          if (!isInitialGate) {
-            setIsAuthModalOpen(false);
-          }
-        }}
-        onLoginGoogleSuccess={(email, name, avatar, uid) => {
-          setUser({ email, name, avatar, googleId: uid, isGuest: false });
-          setIsInitialGate(false);
-          setIsAuthModalOpen(false);
-          setIsSignInSuccessOpen(true);
-        }}
-        onContinueGuest={() => {
-          setUser({ name: 'Guest Explorer', email: '', isGuest: true });
-          setIsInitialGate(false);
-          setIsAuthModalOpen(false);
-          setIsSignInSuccessOpen(true);
-        }}
-        onLogout={handleLogout}
-        user={user}
-        theme={theme}
-        isInitialGate={isInitialGate}
-      />
-
-      {/* Pretty Sign-In Celebration Success Modal */}
-      <SignInSuccessModal
-        isOpen={isSignInSuccessOpen}
-        user={user}
-        onClose={() => setIsSignInSuccessOpen(false)}
         theme={theme}
       />
 

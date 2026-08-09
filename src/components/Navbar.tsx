@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Menu, X, PhoneCall, Palette, User, Code, ExternalLink, MessageSquare } from 'lucide-react';
-import { AuthUser, ThemeMode } from '../types';
+import { Menu, X, PhoneCall, Palette, Code, ExternalLink, MessageSquare } from 'lucide-react';
+import { ThemeMode } from '../types';
 import { THEME_CONFIGS } from '../data/themeData';
 
 interface NavbarProps {
@@ -8,8 +8,6 @@ interface NavbarProps {
   onOpenThemeSelector: () => void;
   activeSection: string;
   theme: ThemeMode;
-  user: AuthUser;
-  onOpenAuth: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -17,8 +15,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenThemeSelector,
   activeSection,
   theme,
-  user,
-  onOpenAuth,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -26,8 +22,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navLinks = [
     { name: 'Strategy', href: '#services' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Package Estimator', href: '#calculator' },
     { name: 'Reviews', href: '#testimonials' },
     { name: 'FAQs', href: '#faqs' },
   ];
@@ -111,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               ))}
             </nav>
 
-            {/* Controls: Theme Selector, Auth, Proposal */}
+            {/* Controls: Theme Selector, Proposal */}
             <div className="hidden sm:flex items-center gap-3">
               
               {/* Theme Palette Modal Button */}
@@ -122,17 +116,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <Palette className="w-4 h-4" style={{ color: activeConfig.accentColor }} />
                 <span className="hidden xl:inline text-[11px]">{activeConfig.name}</span>
-              </button>
-
-              {/* Auth Account Button */}
-              <button
-                onClick={onOpenAuth}
-                className={`px-3.5 py-2.5 rounded-xl border text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${activeConfig.cardClass} ${activeConfig.borderClass}`}
-              >
-                <User className="w-3.5 h-3.5" style={{ color: activeConfig.accentColor }} />
-                <span>
-                  {user.name ? user.name.split(' ')[0] : user.isGuest ? 'Guest' : 'Sign In'}
-                </span>
               </button>
 
               {/* WhatsApp Quick Chat */}
@@ -187,33 +170,17 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Actions */}
             <div className="pt-2 flex flex-col gap-3">
-              <div className="grid grid-cols-2 gap-2">
-                
-                {/* Theme Selector Trigger */}
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenThemeSelector();
-                  }}
-                  className={`py-3 px-3 rounded-xl border text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 min-h-[44px] ${activeConfig.cardClass} ${activeConfig.borderClass}`}
-                >
-                  <Palette className="w-4 h-4" style={{ color: activeConfig.accentColor }} />
-                  <span>Theme Studio</span>
-                </button>
-
-                {/* Account Trigger */}
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenAuth();
-                  }}
-                  className={`py-3 px-3 rounded-xl border text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 min-h-[44px] ${activeConfig.cardClass} ${activeConfig.borderClass}`}
-                >
-                  <User className="w-4 h-4" style={{ color: activeConfig.accentColor }} />
-                  <span>{user.name ? user.name.split(' ')[0] : 'Sign In'}</span>
-                </button>
-
-              </div>
+              {/* Theme Selector Trigger */}
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenThemeSelector();
+                }}
+                className={`w-full py-3 px-3 rounded-xl border text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 min-h-[44px] ${activeConfig.cardClass} ${activeConfig.borderClass}`}
+              >
+                <Palette className="w-4 h-4" style={{ color: activeConfig.accentColor }} />
+                <span>Theme Studio ({activeConfig.name})</span>
+              </button>
 
               {/* WhatsApp Quick Link */}
               <a

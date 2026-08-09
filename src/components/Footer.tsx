@@ -152,14 +152,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact, theme }) => {
             <h4 className="text-xs font-black uppercase tracking-widest" style={{ color: activeConfig.accentColor }}>Navigation</h4>
             <ul className="space-y-2 text-xs font-medium opacity-80">
               <li>
-                <a href="#calculator" className="hover:underline">
-                  Custom Package Estimator
-                </a>
-              </li>
-              <li>
-                <a href="#portfolio" className="hover:underline">
-                  Client Case Studies
-                </a>
+                <button onClick={() => onOpenContact('Full Digital Growth Retainer')} className="hover:underline text-left">
+                  Growth Retainer Proposal
+                </button>
               </li>
               <li>
                 <a href="#testimonials" className="hover:underline">

@@ -282,8 +282,8 @@ export const AGENCY_FAQS: FAQItem[] = [
   },
   {
     id: 'f5',
-    question: 'Can I customize a digital marketing package for my budget?',
-    answer: 'Absolutely. Use our interactive Service Package Estimator on this site to pick the exact services you need (e.g. Web Design + SEO + PPC) and get an instant transparent quote.',
+    question: 'How do I discuss pricing and get a custom proposal for my project?',
+    answer: 'Every business has unique growth targets. Contact us via WhatsApp (+92 332 4357459) or Email (shakeelammar59@gmail.com) to discuss your project scope and receive a custom strategy proposal.',
     category: 'Pricing'
   }
 ];

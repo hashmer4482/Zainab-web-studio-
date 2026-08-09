@@ -32,16 +32,6 @@ export interface PortfolioProject {
   };
 }
 
-export interface CalculatorState {
-  selectedServices: string[];
-  monthlyAdBudget: number;
-  expectedOrderValue: number;
-  monthlyTraffic: number;
-  includeVideoAds: boolean;
-  includeCopywriting: boolean;
-  timelineMonths: number;
-}
-
 export interface Testimonial {
   id: string;
   name: string;
@@ -73,14 +63,6 @@ export interface ThemeConfig {
   textClass: string;
   borderClass: string;
   previewGradient: string;
-}
-
-export interface AuthUser {
-  isGuest: boolean;
-  name?: string;
-  email?: string;
-  avatar?: string;
-  googleId?: string;
 }
 
 export interface ChatMessage {

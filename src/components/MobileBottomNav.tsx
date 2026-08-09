@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MessageSquare, Send, Palette, Calculator } from 'lucide-react';
+import { Phone, MessageSquare, Send, Palette } from 'lucide-react';
 import { ThemeMode } from '../types';
 import { THEME_CONFIGS } from '../data/themeData';
 
@@ -15,11 +15,6 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   theme
 }) => {
   const activeConfig = THEME_CONFIGS[theme] || THEME_CONFIGS.dark;
-
-  const scrollToCalculator = () => {
-    const el = document.querySelector('#calculator');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <div className={`lg:hidden fixed bottom-0 left-0 right-0 z-40 border-t backdrop-blur-xl px-2 py-2 transition-colors ${activeConfig.bgClass}/95 ${activeConfig.borderClass}`}>

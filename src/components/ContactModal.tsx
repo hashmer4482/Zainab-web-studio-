@@ -23,7 +23,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
   const [phone, setPhone] = useState('');
   const [website, setWebsite] = useState('');
   const [service, setService] = useState(prefilledService || 'Website Design & Optimization');
-  const [budget, setBudget] = useState('$1,000 - $2,500 / mo');
+  const [budget, setBudget] = useState('Discuss Pricing via Email / WhatsApp');
   const [message, setMessage] = useState(prefilledMessage || '');
 
   const [isLoading, setIsLoading] = useState(false);
@@ -136,7 +136,7 @@ Website: https://zainabwebstudio.online`;
             <div className={`p-4 rounded-2xl border text-left text-xs space-y-2 max-w-md mx-auto ${activeConfig.cardClass} ${activeConfig.borderClass}`}>
               <div className="font-black uppercase text-[10px]" style={{ color: activeConfig.accentColor }}>Scope Overview</div>
               <div><strong>Service:</strong> {service}</div>
-              <div><strong>Budget Range:</strong> {budget}</div>
+              <div><strong>Pricing Discussion:</strong> {budget}</div>
               {website && <div><strong>Target Site:</strong> {website}</div>}
             </div>
 
@@ -222,33 +222,33 @@ Website: https://zainabwebstudio.online`;
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider mb-1.5">Primary Service</label>
+                <label className="block text-xs font-bold uppercase tracking-wider mb-1.5">Primary Service *</label>
                 <select
                   value={service}
                   onChange={(e) => setService(e.target.value)}
-                  className={`w-full border rounded-xl px-3.5 py-2.5 text-xs focus:outline-none ${activeConfig.cardClass} ${activeConfig.borderClass}`}
+                  className="w-full border rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:ring-2 cursor-pointer bg-neutral-900 text-white dark:bg-neutral-900 dark:text-white border-neutral-700 shadow-sm appearance-auto font-medium"
                 >
-                  <option value="Website Design & Optimization">Website Design & Optimization</option>
-                  <option value="Search Engine Optimization (SEO)">Search Engine Optimization (SEO)</option>
-                  <option value="Social Media Marketing (SMM)">Social Media Marketing (SMM)</option>
-                  <option value="Pay-Per-Click (PPC) Advertising">Pay-Per-Click (PPC) Advertising</option>
-                  <option value="Content Creation & Copywriting">Content Creation & Copywriting</option>
-                  <option value="Canva Ads & Video Making">Canva Ads & Video Making</option>
-                  <option value="Full Digital Growth Retainer">Full Multi-Service Retainer</option>
+                  <option value="Website Design & Optimization" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Website Design & Optimization</option>
+                  <option value="Search Engine Optimization (SEO)" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Search Engine Optimization (SEO)</option>
+                  <option value="Social Media Marketing (SMM)" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Social Media Marketing (SMM)</option>
+                  <option value="Pay-Per-Click (PPC) Advertising" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Pay-Per-Click (PPC) Advertising</option>
+                  <option value="Content Creation & Copywriting" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Content Creation & Copywriting</option>
+                  <option value="Canva Ads & Video Making" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Canva Ads & Video Making</option>
+                  <option value="Full Digital Growth Retainer" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Full Multi-Service Retainer</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider mb-1.5">Budget Target</label>
+                <label className="block text-xs font-bold uppercase tracking-wider mb-1.5">Pricing & Discussion Channel</label>
                 <select
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
-                  className={`w-full border rounded-xl px-3.5 py-2.5 text-xs focus:outline-none ${activeConfig.cardClass} ${activeConfig.borderClass}`}
+                  className="w-full border rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:ring-2 cursor-pointer bg-neutral-900 text-white dark:bg-neutral-900 dark:text-white border-neutral-700 shadow-sm appearance-auto font-medium"
                 >
-                  <option value="$500 - $1,000 / mo">$500 - $1,000 / mo</option>
-                  <option value="$1,000 - $2,500 / mo">$1,000 - $2,500 / mo</option>
-                  <option value="$2,500 - $5,000 / mo">$2,500 - $5,000 / mo</option>
-                  <option value="$5,000+ / mo">$5,000+ / mo</option>
+                  <option value="Discuss Pricing via Email (shakeelammar59@gmail.com)" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Discuss Pricing via Email</option>
+                  <option value="Discuss Pricing via WhatsApp Chat (+92 332 4357459)" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Discuss Pricing via WhatsApp Chat</option>
+                  <option value="Request Custom Retainer Proposal" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Request Custom Retainer Proposal</option>
+                  <option value="Discuss via Phone Call / Virtual Meeting" className="bg-neutral-900 text-white font-sans py-1.5 px-2">Discuss via Phone Call / Meeting</option>
                 </select>
               </div>
             </div>
