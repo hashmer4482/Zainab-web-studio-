@@ -21,7 +21,9 @@ googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
 
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId || '(default)');
+export const db = (firebaseConfig.firestoreDatabaseId && firebaseConfig.firestoreDatabaseId !== '(default)')
+  ? getFirestore(app, firebaseConfig.firestoreDatabaseId)
+  : getFirestore(app);
 
 export async function signInWithGoogle() {
   try {
