@@ -93,7 +93,7 @@ Respond clearly, professionally, and concisely in a refined editorial style to c
     ].join("\n");
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
+      model: "gemini-3.1-flash-lite",
       contents: contents,
       config: {
         systemInstruction: systemPrompt,
