@@ -9,6 +9,7 @@ import { ContactModal } from './components/ContactModal';
 import { Footer } from './components/Footer';
 import { AIChatbotWidget } from './components/AIChatbotWidget';
 import { AuthModal } from './components/AuthModal';
+import { SignInSuccessModal } from './components/SignInSuccessModal';
 import { ThemeSelectorModal } from './components/ThemeSelectorModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { AuthUser, ThemeMode } from './types';
@@ -23,6 +24,7 @@ export default function App() {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
   const [isInitialGate, setIsInitialGate] = useState(true);
+  const [isSignInSuccessOpen, setIsSignInSuccessOpen] = useState(false);
 
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [contactPrefilledService, setContactPrefilledService] = useState('');
@@ -206,16 +208,26 @@ export default function App() {
           setUser({ email, name, avatar, googleId: uid, isGuest: false });
           setIsInitialGate(false);
           setIsAuthModalOpen(false);
+          setIsSignInSuccessOpen(true);
         }}
         onContinueGuest={() => {
           setUser({ name: 'Guest Explorer', email: '', isGuest: true });
           setIsInitialGate(false);
           setIsAuthModalOpen(false);
+          setIsSignInSuccessOpen(true);
         }}
         onLogout={handleLogout}
         user={user}
         theme={theme}
         isInitialGate={isInitialGate}
+      />
+
+      {/* Pretty Sign-In Celebration Success Modal */}
+      <SignInSuccessModal
+        isOpen={isSignInSuccessOpen}
+        user={user}
+        onClose={() => setIsSignInSuccessOpen(false)}
+        theme={theme}
       />
 
       {/* Persistent Floating Prominent Developer Badge */}
