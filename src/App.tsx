@@ -53,12 +53,17 @@ export default function App() {
 
     const unsubscribe = onAuthStateChanged(auth, (fbUser) => {
       if (fbUser) {
-        setUser({
-          isGuest: false,
-          name: fbUser.displayName || 'Google User',
-          email: fbUser.email || '',
-          avatar: fbUser.photoURL || undefined,
-          googleId: fbUser.uid
+        setUser((prev) => {
+          if (!prev || prev.isGuest) {
+            setIsSignInSuccessOpen(true);
+          }
+          return {
+            isGuest: false,
+            name: fbUser.displayName || 'Google User',
+            email: fbUser.email || '',
+            avatar: fbUser.photoURL || undefined,
+            googleId: fbUser.uid
+          };
         });
         setIsInitialGate(false);
         setIsAuthModalOpen(false);
